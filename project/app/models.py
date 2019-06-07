@@ -8,5 +8,5 @@ class Route(models.Model):
 class Station(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
-    routes = models.ManyToManyField(Route, related_name="stations", null=True)
+    routes = models.ManyToManyField(Route, related_name="stations")
     name = models.CharField(max_length=128)

@@ -6,21 +6,20 @@
         Для запуска на сервере, укажите свой API-ключ. Тестовый ключ НЕ БУДЕТ работать на других сайтах.
         Получить ключ можно в Кабинете разработчика: https://developer.tech.yandex.ru/keys/
     -->
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<>" type="text/javascript"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<ваш API-ключ>" type="text/javascript"></script>
     <script type="text/javascript">
       ymaps.ready(init);
 
       function init() {
         var myMap = new ymaps.Map("map", {
           center: [{{ center.y }}, {{ center.x }}],
-          zoom: 3
+          zoom: 5
         }, {
           searchControlProvider: 'yandex#search'
         });
-
         {% for item in stations %}
           myMap.geoObjects
-            .add(new ymaps.Placemark([{{ item.latitude }}, {{ item.longitude }}], {
+            .add(new ymaps.Placemark([{{ item.latitude|stringformat:"f" }}, {{ item.longitude|stringformat:"f" }}], {
               balloonContent: '{{ item.route_numbers }}',
               iconCaption: '{{ item.name }}'
             }, {
@@ -32,7 +31,6 @@
     </script>
 {% endblock %}
 {% block content %}
-
     <form method="GET" action="">
         <div class="row form-top">
             <div class="col-md-4 text-right align-middle form-top">
@@ -50,5 +48,5 @@
             </div>
         </div>
     </form>
-    <div id="map"></div>
+    <div id="map" style="height:800; width:600;"></div>
 {% endblock %}

@@ -12,7 +12,8 @@ class Command(BaseCommand):
             data = csv.DictReader(csvfile, delimiter=';')
             n = 0
             for line in data:
-
+                n +=1
+                print(n)
                 station = Station.objects.create(longitude=line['Longitude_WGS84'],
                                                  latitude=line['Latitude_WGS84'],
                                                  name=line['StationName'])
@@ -32,3 +33,4 @@ class Command(BaseCommand):
                             station.routes.add(Route.objects.get(name=route))
                         else:
                             station.routes.add(Route.objects.create(name=route))
+
